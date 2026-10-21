@@ -1,0 +1,5 @@
+command: python3 checker/check_primal.py certs/controls/upper_tail_neg.json --workers 2
+r = 5509/10000 = 0.5509; 1808 Gaussian pairs; Y = 92
+g(0) = [-0.00349408183285715700104701785884951930885896203086886 +/- 3.01e-54]  (< 0: True)
+AssertionError while checking the input conditions: (assert failed)
+RESULT: rejected

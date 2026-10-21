@@ -1,0 +1,25 @@
+r = 2751/5000; W(2.9194477) = 0.000163202820; W(r+1e-9) = 32.654316
+grid [0.5507, 40.0] step 0.0005: min W = 0.0004131 at y = 14.43470
+intervals (gaps < 0.02 merged) where W < 0.0015, length >= 0.1:
+  [1.065, 2.140]  length 1.075  fraction below 0.946  max W inside 0.01435
+  [3.112, 3.845]  length 0.732  fraction below 0.922  max W inside 0.01221
+  [5.009, 5.662]  length 0.653  fraction below 0.958  max W inside 0.00404
+  [6.861, 7.439]  length 0.577  fraction below 0.892  max W inside 0.00558
+  [10.711, 11.084]  length 0.373  fraction below 1.000  max W inside 0.00148
+  [12.569, 12.832]  length 0.263  fraction below 0.951  max W inside 0.00153
+  [16.239, 16.407]  length 0.168  fraction below 1.000  max W inside 0.00150
+  [18.035, 18.315]  length 0.279  fraction below 1.000  max W inside 0.00149
+  [19.763, 20.098]  length 0.334  fraction below 1.000  max W inside 0.00149
+  [21.560, 21.992]  length 0.432  fraction below 1.000  max W inside 0.00150
+  [25.186, 25.441]  length 0.255  fraction below 1.000  max W inside 0.00147
+  [27.035, 27.382]  length 0.347  fraction below 0.958  max W inside 0.00155
+  [28.966, 29.124]  length 0.157  fraction below 1.000  max W inside 0.00150
+  [32.503, 32.731]  length 0.227  fraction below 1.000  max W inside 0.00149
+  [34.454, 34.569]  length 0.115  fraction below 1.000  max W inside 0.00150
+  on [1.0, 2.4]: min 0.000470  max 5.13068
+  on [2.3, 3.2]: min 0.000441  max 4.32858
+  on [3.0, 4.1]: min 0.000428  max 4.02512
+  on [4.0, 4.9]: min 0.000504  max 4.36663
+  on [4.8, 5.8]: min 0.000441  max 3.37002
+  on [5.6, 6.9]: min 0.000476  max 2.88767
+  on [6.8, 7.5]: min 0.000476  max 0.89457

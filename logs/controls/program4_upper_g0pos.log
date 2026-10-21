@@ -1,0 +1,6 @@
+[indep-primal] r = 5509/10000 = 0.5509; 1808 pairs; Y = 92, Y2 = 184
+[indep-primal] g(0) arb = [9.9999340278950256080e-9 +/- 4.57e-29]; mpmath(60 digits) = 9.999934027895025608e-9; < 0: False
+[indep-primal] tail: g/G >= [1.93021790000000e-5 +/- 3e-24] on [Y, inf) (largest vertex 80.0000 <= Y = 92); > 0: True
+[indep-primal] g > 0 on [r, Y2]: PROVED; smallest local lower bound 1.2022470318533614e-12; 107499 intervals; 310s
+[indep-primal] RESULT: FAIL
+exit 1

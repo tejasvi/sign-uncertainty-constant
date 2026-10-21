@@ -1,0 +1,94 @@
+# Cutting-plane LP for Gaussian-pair certificates (closed-form W at all y; constraint generation on a fine grid).
+import numpy as np, sys, time, json, argparse
+from scipy.optimize import linprog
+from lp_g2 import nodes, F_b_I, F_bhat_I, v_pair, Cmat, FI1
+
+class Problem:
+    def __init__(self, r, pairs, n=120):
+        self.r = r; self.pairs = pairs
+        self.xq, self.wq = nodes(r, n)
+        K = 2*np.cos(2*np.pi*np.outer(self.xq, self.xq))*self.wq[None, :]
+        self.R = np.linalg.inv(np.eye(n) - K)
+        self.R1 = self.R @ np.ones(n)
+        self.RV = np.array([self.R @ v_pair(self.xq, a, s) for (a, s) in pairs]).T   # n x m
+
+    def rows(self, y):
+        y = np.asarray(y, float)
+        CM = Cmat(self.xq, y, self.r)*(2*self.wq)[None, :]
+        W0 = 1 + FI1(y, self.r) + CM @ self.R1
+        A = np.empty((len(y), len(self.pairs)))
+        for j, (a, s) in enumerate(self.pairs):
+            A[:, j] = -v_pair(y, a, s) - (F_b_I(a, s, y, self.r) - F_bhat_I(a, s, y, self.r))
+        A -= CM @ self.RV
+        return W0, A
+
+    def W(self, y, c, chunk=4000):
+        out = np.empty(len(y))
+        for i in range(0, len(y), chunk):
+            W0, A = self.rows(y[i:i+chunk])
+            out[i:i+chunk] = W0 + A @ c
+        return out
+
+def solve(W0, A, cmax):
+    m = A.shape[1]
+    cobj = np.zeros(m+1); cobj[-1] = -1
+    Aub = np.hstack([-A, np.ones((len(W0), 1))])
+    res = linprog(cobj, A_ub=Aub, b_ub=W0, bounds=[(-cmax, cmax)]*m + [(None, None)], method='highs-ipm')
+    return (-res.fun, res.x[:-1]) if res.status == 0 else (None, res.message)
+
+def local_minima(y, W, thresh):
+    i = np.where((W[1:-1] <= W[:-2]) & (W[1:-1] <= W[2:]) & (W[1:-1] < thresh))[0] + 1
+    out = list(i)
+    if W[0] < thresh: out.append(0)
+    if W[-1] < thresh: out.append(len(W)-1)
+    return np.array(sorted(set(out)), int)
+
+if __name__ == "__main__":
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--r", type=float, required=True)
+    ap.add_argument("--ds", type=float, default=0.2)
+    ap.add_argument("--X", type=float, default=30)
+    ap.add_argument("--widths", type=str, default="2,8,32")
+    ap.add_argument("--s0", type=float, default=None)
+    ap.add_argument("--cmax", type=float, default=1000)
+    ap.add_argument("--Yfar", type=float, default=1500)
+    ap.add_argument("--iters", type=int, default=8)
+    ap.add_argument("--out", type=str, required=True)
+    ap.add_argument("--extra", type=str, action="append", default=[], help="a:s0:s1:ds extra Gaussian pairs")
+    a = ap.parse_args()
+    r = a.r; widths = [float(w) for w in a.widths.split(',')]
+    s0 = a.ds if a.s0 is None else a.s0
+    pairs = [(w, float(s)) for s in np.arange(s0, a.X + 1e-9, a.ds) for w in widths]
+    for ex in a.extra:
+        aa, e0, e1, ed = [float(z) for z in ex.split(':')]
+        pairs += [(aa, float(round(s, 6))) for s in np.arange(e0, e1 + 1e-9, ed)]
+    t0 = time.time()
+    P = Problem(r, pairs)
+    X = a.X
+    coarse = np.unique(np.concatenate([[r], r + np.geomspace(1e-6, 0.05, 100), np.arange(r + 0.05, X + 6, 0.01),
+                                       np.arange(X + 6, 80, 0.1), np.arange(80, a.Yfar, 1.0)]))
+    fine = np.unique(np.concatenate([[r], r + np.geomspace(1e-7, 0.05, 2000), np.arange(r + 0.05, X + 6, 0.0005),
+                                     np.arange(X + 6, 80, 0.005), np.arange(80, a.Yfar, 0.05)]))
+    grid = coarse
+    W0g, Ag = P.rows(grid)
+    print(f"r={r} m={len(pairs)} coarse={len(grid)} fine={len(fine)} setup {time.time()-t0:.0f}s", flush=True)
+    best = None
+    for it in range(a.iters):
+        t, c = solve(W0g, Ag, a.cmax)
+        if t is None:
+            print("LP failed:", c, flush=True); break
+        Wf = P.W(fine, c)
+        mn = Wf.min(); imn = np.argmin(Wf)
+        print(f"  it {it}: LP t={t:.6f}  fine min={mn:.6f} at y={fine[imn]:.5f}  rows={len(grid)}  ({time.time()-t0:.0f}s)", flush=True)
+        if best is None or mn > best[0]:
+            best = (mn, c.copy(), t)
+            json.dump({"r": r, "pairs": pairs, "c": list(c), "t": t, "finemin": float(mn)}, open(a.out, "w"))
+        if mn >= t - 2e-4:
+            break
+        idx = local_minima(fine, Wf, t - 1e-4)
+        newy = fine[idx]
+        # add the minima and their immediate neighbours
+        add = np.unique(np.concatenate([newy, fine[np.clip(idx-1, 0, len(fine)-1)], fine[np.clip(idx+1, 0, len(fine)-1)]]))
+        W0n, An = P.rows(add)
+        grid = np.concatenate([grid, add]); W0g = np.concatenate([W0g, W0n]); Ag = np.vstack([Ag, An])
+    print(f"best fine min {best[0]:.6f} (LP t {best[2]:.6f}); saved {a.out}; total {time.time()-t0:.0f}s", flush=True)

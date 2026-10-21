@@ -1,0 +1,16 @@
+[indep-primal] r = 5509/10000 = 0.5509; 1808 pairs; Y = 92, Y2 = 184
+[indep-primal] g(0) arb = [-0.00050001000006597210497 +/- 4.40e-24]; mpmath(60 digits) = -0.00050001000006597210497; < 0: True
+[indep-primal] tail: g/G >= [1.93021790000000e-5 +/- 3e-24] on [Y, inf) (largest vertex 80.0000 <= Y = 92); > 0: True
+[indep-primal] FAIL g on [2.5509, 2.8009]: bound -7.6901360912433e-05 at (2.8008999999981374, 2.8009)
+[indep-primal] FAIL g on [2.8009, 3.0509]: bound -4.927713213074393e-14 at (3.0456462508734314, 3.0456462508752944)
+[indep-primal] FAIL g on [0.5509, 0.8009]: bound -6.14346759877499e-05 at (0.8008999999981373, 0.8009)
+[indep-primal] FAIL g on [0.8009, 1.0509]: bound -4.3287344902694255e-13 at (1.0301121841739864, 1.030112184175849)
+[indep-primal] FAIL g on [3.8009, 4.0509]: bound -4.3866656337744446e-15 at (4.028955832637474, 4.028955832639337)
+[indep-primal] FAIL g on [3.0509, 3.3009]: bound -2.17722411939969e-14 at (3.074104506419599, 3.074104506421462)
+[indep-primal] FAIL g on [2.3009, 2.5509]: bound -4.256466395662388e-14 at (2.546071722875908, 2.5460717228777705)
+[indep-primal] FAIL g on [69.5509, 69.8009]: bound -0.00011637975554894291 at (69.80089999999814, 69.8009)
+[indep-primal] FAIL g on [69.8009, 70.0509]: bound -0.0008584369294945518 at (70.05089999999814, 70.0509)
+[indep-primal] FAIL g on [70.0509, 70.3009]: bound -5.960413574082493e-16 at (70.27269552155732, 70.2726955215592)
+[indep-primal] g > 0 on [r, Y2]: NOT PROVED; smallest local lower bound 1.2022470318533614e-12; 93117 intervals; 275s
+[indep-primal] RESULT: FAIL
+exit 1

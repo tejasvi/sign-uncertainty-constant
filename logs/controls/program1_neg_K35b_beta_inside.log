@@ -1,0 +1,3 @@
+command: python3 checker/check_cert_pm.py certs/controls/neg_K35b_beta_inside.json --workers 2
+AssertionError while checking the input conditions: ('5499/10000', '23649391/25000000')
+RESULT: rejected

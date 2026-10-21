@@ -1,0 +1,5 @@
+command: python3 checker/indep_primal.py certs/controls/upper_wide_hat.json --workers 2
+[indep-primal] r = 5509/10000 = 0.5509; 1809 pairs; Y = 92, Y2 = 184
+[indep-primal] g(0) arb = [-1.0000034722104974392e-8 +/- 4.56e-29]; mpmath(60 digits) = -1.0000034722104974392e-8; < 0: True
+AssertionError while checking the input conditions: (assert failed)
+RESULT: rejected

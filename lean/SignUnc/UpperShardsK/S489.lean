@@ -1,0 +1,12 @@
+import SUCert.UpperCfgK
+import SUCert.DataGroups
+
+namespace SignUnc.UpperRunK
+open SignUnc.Chk SignUnc.Data
+
+set_option maxHeartbeats 0
+set_option maxRecDepth 1000000
+
+theorem shardK_489 : segOK4 cfgK upperGroups (⟨(2033635756801184728300768314287659679744 : Int), 8, [⟨8, 37, 0, false⟩, ⟨12, 33, 0, false⟩, ⟨14, 31, 0, true⟩, ⟨16, 29, 0, true⟩, ⟨17, 28, 0, true⟩, ⟨131, 131, 0, true⟩, ⟨71, 71, 0, true⟩, ⟨0, 1, 1, false⟩], [(2658455991569831745807614120560689152, 2), (2741532741306388987864102061828210688, 1)]⟩ : Seg4) = true := by decide +kernel
+
+end SignUnc.UpperRunK

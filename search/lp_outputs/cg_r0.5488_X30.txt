@@ -1,0 +1,4 @@
+r=0.5488 m=450 coarse=5501 fine=110003 setup 6s
+  it 0: LP t=0.000098  fine min=-0.200281 at y=2.30380  rows=5501  (119s)
+  it 1: LP t=-0.000038  fine min=-0.037750 at y=4.59630  rows=5738  (224s)
+  it 2: LP t=-0.000063  fine min=-0.004020 at y=2.93480  rows=5924  (432s)

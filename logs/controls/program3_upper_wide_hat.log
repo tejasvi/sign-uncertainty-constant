@@ -1,0 +1,5 @@
+command: python3 checker/check_primal.py certs/controls/upper_wide_hat.json --workers 2
+r = 5509/10000 = 0.5509; 1809 Gaussian pairs; Y = 92
+g(0) = [-1.000003472210497439204558111470523694705593714e-8 +/- 5.93e-54]  (< 0: True)
+AssertionError while checking the input conditions: (assert failed)
+RESULT: rejected

@@ -1,0 +1,12 @@
+[indep] r = 2751/5000; 530 pairs; psi deg 40; m = 3/50000, e = 1/500000, YT = 1500
+[indep] kappa <= 943801849321335032954326073551/1000000000000000000000000000000 = 0.943801849321335
+[indep] int_0^r |phi| x^2 <= 566.86;  C2 = sup|F phi''| bound <= 44757.4
+[indep] pm terms: 5, sum d = 94999999/100000000 = 0.94999999; betas >= r and d >= 0 asserted
+[indep] phi^(k)(r): [32.654328765089446, -13153.594308619087, 5564516.113732285, -1729263170.647752, 359713402232.4889, -40256607145201.305, -1260095142291237.0, 1.8352603614241318e+18]
+[indep] int_0^r |phi^(8)| <= 3.81718e+21;  tail: W >= 0.042761 on [YT, inf)
+[indep] far-field F phi'' bound: |chi^(k)(r)| <= [9.885119709941028, 3945.923771875838, 1655607.4188328031, 505191957.16021305], int|chi^(4)| <= 2.517e+11
+[indep] W on [r, YT]: PROVED >= 6e-05; smallest local lower bound 6.003775560282874e-05; 192401 intervals; 1112s
+[indep] sup|rho| on [0, r]: PROVED <= 2e-06; largest local bound 4.721961119769284e-07
+[indep] final: m = 6e-05 > 2 r e/(1 - kappa) = 3.91614e-05: True
+[indep] RESULT: PASS  (A_+(1) > 2751/5000)
+[indep] total 1697s

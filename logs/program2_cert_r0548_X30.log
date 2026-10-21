@@ -1,0 +1,10 @@
+[indep] r = 137/250; 450 pairs; psi deg 40; m = 1/500, e = 1/20000, YT = 300
+[indep] kappa <= 941646901609096982827414364979/1000000000000000000000000000000 = 0.941646901609097
+[indep] int_0^r |phi| x^2 <= 1850.98;  C2 = sup|F phi''| bound <= 146148
+[indep] phi^(k)(r): [249.299002883025, -89049.4353054091, 24826123.795363653, -5026331819.574089, 642883092989.164, -18311800012298.754, -1.1158509737120498e+16, 2.042295220271267e+18]
+[indep] int_0^r |phi^(8)| <= 1.76012e+21;  tail: W >= 0.677073 on [YT, inf)
+[indep] W on [r, YT]: PROVED >= 0.002; smallest local lower bound 0.0020004171010587204; 180951 intervals; 385s
+[indep] sup|rho| on [0, r]: PROVED <= 5e-05; largest local bound 2.2644791601485508e-05
+[indep] final: m = 0.002 > 2 r e/(1 - kappa) = 0.00093911: True
+[indep] RESULT: PASS  (A_+(1) > 137/250)
+[indep] total 478s

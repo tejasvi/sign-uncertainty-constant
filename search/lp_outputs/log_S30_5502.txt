@@ -1,0 +1,11 @@
+r=0.5502 m=460 coarse=6806 fine=115400 setup 2s
+  it 0: LP t=-0.000615  fine min=-0.022215 at y=2.29820  rows=6806  (44s)
+  it 1: LP t=-0.000666  fine min=-0.028643 at y=2.99820  rows=6989  (88s)
+  it 2: LP t=-0.000676  fine min=-0.001368 at y=2.23820  rows=7079  (132s)
+  it 3: LP t=-0.000675  fine min=-0.024289 at y=4.64420  rows=7106  (175s)
+  it 4: LP t=-0.000682  fine min=-0.001445 at y=3.99270  rows=7133  (219s)
+  it 5: LP t=-0.000676  fine min=-0.000929 at y=4.18270  rows=7157  (263s)
+  it 6: LP t=-0.000679  fine min=-0.003396 at y=2.99720  rows=7169  (307s)
+  it 7: LP t=-0.000674  fine min=-0.002205 at y=4.64570  rows=7184  (351s)
+  it 8: LP t=-0.000671  fine min=-0.000758 at y=3.81070  rows=7196  (396s)
+best fine min -0.000758 (LP t -0.000671); saved out_S30_5502.json; total 396s

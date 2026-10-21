@@ -1,0 +1,8 @@
+r=0.5485 m=450 coarse=5501 fine=110003 setup 8s
+  it 0: LP t=0.002879  fine min=-0.229682 at y=2.30350  rows=5501  (107s)
+  it 1: LP t=0.002699  fine min=-0.025227 at y=5.94550  rows=5816  (213s)
+  it 2: LP t=0.002654  fine min=-0.021886 at y=4.64550  rows=5951  (335s)
+  it 3: LP t=0.002648  fine min=0.001921 at y=2.95950  rows=6017  (566s)
+  it 4: LP t=0.002647  fine min=0.002350 at y=7.35100  rows=6044  (720s)
+  it 5: LP t=0.002647  fine min=0.002551 at y=14.73100  rows=6056  (857s)
+best fine min 0.002551 (LP t 0.002647); saved cg_r0.5485_X30.json; total 857s

@@ -1,0 +1,48 @@
+SignUnc.lower_weakK : SignUnc.LowerStatementWeak
+def SignUnc.LowerStatementWeak : Prop :=
+ENNReal.ofReal ((2751 / 5000) ^ 2) ≤ SignUnc.Aplus2 ∧ ENNReal.ofReal ((2751 / 5000) ^ 2) ≤ SignUnc.C611
+SignUnc.lower_strictK : SignUnc.ExtremizerHyp →
+  ENNReal.ofReal ((2751 / 5000) ^ 2) < SignUnc.Aplus2 ∧ ENNReal.ofReal ((2751 / 5000) ^ 2) < SignUnc.C611
+def SignUnc.ExtremizerHyp : Prop :=
+∃ g,
+  Continuous g ∧
+    MeasureTheory.Integrable g MeasureTheory.volume ∧
+      (∀ (x : ℝ), g (-x) = g x) ∧
+        (SignUnc.ft g = fun x => ↑(g x)) ∧
+          g 0 = 0 ∧ g ≠ 0 ∧ ((SignUnc.A fun x => ↑(g x)) * SignUnc.A fun x => ↑(g x)) = SignUnc.Aplus2
+SignUnc.mainK : SignUnc.ExtremizerHyp → SignUnc.MainStatement
+def SignUnc.MainStatement : Prop :=
+ENNReal.ofReal ((2751 / 5000) ^ 2) < SignUnc.Aplus2 ∧
+  SignUnc.Aplus2 ≤ ENNReal.ofReal ((5509 / 10000) ^ 2) ∧
+    ENNReal.ofReal ((2751 / 5000) ^ 2) < SignUnc.C611 ∧ SignUnc.C611 ≤ ENNReal.ofReal ((5509 / 10000) ^ 2)
+SignUnc.upperK : SignUnc.UpperStatement
+def SignUnc.UpperStatement : Prop :=
+SignUnc.Aplus2 ≤ ENNReal.ofReal ((5509 / 10000) ^ 2) ∧ SignUnc.C611 ≤ ENNReal.ofReal ((5509 / 10000) ^ 2)
+@SignUnc.A_pos_classA : ∀ {f : ℝ → ℝ}, SignUnc.ClassA f → 0 < SignUnc.A fun x => ↑(f x)
+@SignUnc.A_ft_pos_classA : ∀ {f : ℝ → ℝ}, SignUnc.ClassA f → 0 < SignUnc.A (SignUnc.ft f)
+@SignUnc.A_pos_class611 : ∀ {f : ℝ → ℝ}, SignUnc.Class611 f → 0 < SignUnc.A fun x => ↑(f x)
+@SignUnc.A_ft_pos_class611 : ∀ {f : ℝ → ℝ}, SignUnc.Class611 f → 0 < SignUnc.A (SignUnc.ft f)
+SignUnc.aplus2_pos_finiteK : 0 < SignUnc.Aplus2 ∧ SignUnc.Aplus2 < ⊤
+SignUnc.probe_clauses : ∃ g,
+  Continuous g ∧
+    MeasureTheory.Integrable g MeasureTheory.volume ∧
+      (∀ (x : ℝ), g (-x) = g x) ∧ (SignUnc.ft g = fun x => ↑(g x)) ∧ g 0 = 0 ∧ g ≠ 0
+SignUnc.probe_le : ∀ (g : ℝ → ℝ),
+  Continuous g →
+    MeasureTheory.Integrable g MeasureTheory.volume →
+      (∀ (x : ℝ), g (-x) = g x) →
+        (SignUnc.ft g = fun x => ↑(g x)) →
+          g 0 = 0 →
+            g ≠ 0 →
+              (SignUnc.Aplus2 ≤ (SignUnc.A fun x => ↑(g x)) * SignUnc.A fun x => ↑(g x)) ∧ 0 < SignUnc.A fun x => ↑(g x)
+'SignUnc.A_pos_classA' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SignUnc.A_ft_pos_classA' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SignUnc.A_pos_class611' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SignUnc.A_ft_pos_class611' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SignUnc.lower_weakK' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SignUnc.lower_strictK' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SignUnc.mainK' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SignUnc.upperK' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SignUnc.aplus2_pos_finiteK' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SignUnc.probe_clauses' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SignUnc.probe_le' depends on axioms: [propext, Classical.choice, Quot.sound]

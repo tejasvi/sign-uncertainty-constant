@@ -1,0 +1,49 @@
+name = "LeanSignUnc"
+version = "0.1.0"
+keywords = ["math"]
+defaultTargets = ["SignUnc", "SUCert"]
+
+[leanOptions]
+pp.unicode.fun = true
+relaxedAutoImplicit = false
+autoImplicit = false
+weak.linter.style.header = false
+
+# Toolchain leanprover/lean4:v4.35.0-rc3; Mathlib at tag v4.35.0-rc3 (commit c55e6e786f49, see lake-manifest.json).
+[[require]]
+name = "mathlib"
+scope = "leanprover-community"
+rev = "v4.35.0-rc3"
+
+[[lean_lib]]
+name = "SignUnc"
+
+# Certificate checker and data (core Lean only), compiled to native code so that `native_decide`
+# in the shard modules runs compiled code.
+[[lean_lib]]
+name = "SUCert"
+precompileModules = true
+
+[[lean_exe]]
+name = "bench"
+root = "SignUnc.Bench"
+
+[[lean_exe]]
+name = "benchgrid"
+root = "SignUnc.BenchGrid"
+
+[[lean_exe]]
+name = "benchgrid2"
+root = "SignUnc.BenchGrid2"
+
+[[lean_exe]]
+name = "benchjet"
+root = "SignUnc.BenchJet"
+
+[[lean_exe]]
+name = "genjet"
+root = "SignUnc.GenJet"
+
+[[lean_exe]]
+name = "genlow"
+root = "SignUnc.GenLow"
