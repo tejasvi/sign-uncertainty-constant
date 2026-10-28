@@ -2,7 +2,7 @@
 
 Certificates, checking programs and Lean proofs for the paper
 *Bounds for the sign uncertainty constant in dimension one* by Tejasvi Singh Tomar
-(Zenodo, [doi:10.5281/zenodo.23543002](https://doi.org/10.5281/zenodo.23543002)).
+(Zenodo, [doi:10.5281/zenodo.23716092](https://doi.org/10.5281/zenodo.23716092)).
 
 ## Theorem
 
@@ -14,12 +14,8 @@ let `A₊(1) = inf_{f ∈ 𝒜} √(A(f) A(f̂))`. Then
 
 where `C_6.11` is the constant of Problem 6.11 of Georgiev, Gómez-Serrano, Tao and Wagner (arXiv:2511.02864),
 defined with `f(0) < 0` and `f̂(0) < 0`. `C_6.11 = A₊(1)²` is Lemma 2.4 of the paper. For `≤`, the lemma uses a result
-of Gonçalves, Oliveira e Silva and Ramos (J. Geom. Anal. 31 (2021), Proposition 3 of arXiv:2003.10765). The previous
-bounds were
-`0.2025 ≤ C_6.11` (Gonçalves, Oliveira e Silva and Steinerberger, J. Math. Anal. Appl. 451 (2017)) and
-`C_6.11 ≤ 0.3089` (Chung, Du and Wesley, arXiv:2608.23691v2). The upper bound proves the first assertion of
-Conjecture 1.7 of Gonçalves, Oliveira e Silva and Ramos (Discrete Anal. 2023), `A₊(1) < 0.555`. Both bounds also have
-Lean 4 proofs (`lean/`, see "Lean proofs"). There the strict lower bounds take the existence of an extremizer
+of Gonçalves, Oliveira e Silva and Ramos (J. Geom. Anal. 31 (2021), Proposition 3 of arXiv:2003.10765). Both bounds
+also have Lean 4 proofs (`lean/`, see "Lean proofs"). There the strict lower bounds take the existence of an extremizer
 (Theorem 3 of Gonçalves, Oliveira e Silva and Steinerberger) as a hypothesis, and the lower bounds for `C_6.11` are
 proved for real-valued `f`.
 
@@ -61,10 +57,11 @@ self-dual function in both classes and `A(g) A(ĝ) ≤ r²`. Programs 3 and 4 ch
 | `checker/indep_check.py` | earlier version of program 2 for certificates without cosine terms |
 | `checker/check_primal.py` | program 3 (upper bound: Taylor bounds on `[r, Y]`, dominant-Gaussian tail, 192-bit balls) |
 | `checker/indep_primal.py` | program 4 (upper bound: interpolation bounds on `[r, 2Y]`, vertex tail bound, Arb and mpmath) |
-| `logs/` | logs of the runs in Table 1 of the paper and of the controls |
+| `logs/` | logs of the runs in Tables 1 and 2 of the paper and of the controls |
 | `search/` | the linear programs and certificate generators (not needed for checking) |
 | `tests/` | floating-point checks used in the remarks of the paper (not part of the proof) |
 | `lean/` | the Lean 4 proofs of the bounds (see "Lean proofs") |
+| `paper/` | the LaTeX source of the paper (version 6), the data of its Figure 1 (`fig_g.dat`, `fig_W.dat`) and `fig_data.py`, which computes them from the certificates in floating point (not part of the proof) |
 
 SHA-256 checksums of all files are in `SHA256SUMS`.
 
@@ -449,10 +446,18 @@ The headers of `MomsLit16.lean` and `MomsLit20.lean` name the generator by its o
 `SignUnc/Test11b/GenMoms.lean`; it ships as `tools/GenMoms.lean`. A comment in `lakefile.toml` mentions `native_decide`,
 which these proofs do not use.
 
-`logs/release_reruns/` holds the output of the programs in `checker/` on the certificates of Table 1 of the paper. These
+`logs/release_reruns/` holds the output of the programs in `checker/` on the certificates of Tables 1 and 2 of the paper. These
 logs reproduce the corresponding logs above. The two `_rerun` logs in `logs/` come from separate runs of the same
 programs on separate copies of the certificates, and they are identical to the logs above apart from the times and
 the last digits of the ball that program 1 prints for ∫|φ⁽⁶⁾|, which depend on the order of summation.
+
+## Versions
+
+Version 6 (tag `v6`) goes with version 6 of the paper, which has a new abstract, a revised introduction, a figure and a
+shorter Section 6 (the details of the Lean proofs are in this README). In that version the bounds for `C_6.11` form
+Corollary 1.2; the docstrings of the Lean files, written for earlier versions, count them as part of Theorem 1.1. Version 6
+adds the directory `paper/` with the paper's LaTeX source and the data of its figure. The certificates, programs, logs and
+Lean files are those of version 5, which is commit `969f854b59fa` of this repository.
 
 ## License
 

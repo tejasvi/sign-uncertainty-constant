@@ -6,8 +6,8 @@ authors:
     given-names: Tejasvi Singh
     orcid: "https://orcid.org/0000-0003-4668-3639"
 license: Apache-2.0
-repository-code: "https://github.com/tejasvi/sign-uncertainty-constant-v5"
-doi: 10.5281/zenodo.23543003
+repository-code: "https://github.com/tejasvi/sign-uncertainty-constant"
+doi: 10.5281/zenodo.23716093
 preferred-citation:
   type: article
   title: "Bounds for the sign uncertainty constant in dimension one"
@@ -15,5 +15,5 @@ preferred-citation:
     - family-names: Tomar
       given-names: Tejasvi Singh
       orcid: "https://orcid.org/0000-0003-4668-3639"
-  doi: 10.5281/zenodo.23543002
+  doi: 10.5281/zenodo.23716092
   year: 2026

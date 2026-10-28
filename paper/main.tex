@@ -1,0 +1,429 @@
+\documentclass[11pt]{amsart}
+\pdfsuppressptexinfo=-1
+\usepackage[margin=1.1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs,enumitem,multirow}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.17}
+\usepackage[hidelinks]{hyperref}
+\hypersetup{pdftitle={Bounds for the sign uncertainty constant in dimension one},
+  pdfauthor={Tejasvi Singh Tomar}}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\numberwithin{equation}{section}
+\setlength{\emergencystretch}{2em}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\one}{\mathbf{1}}
+\newcommand{\Id}{\mathrm{Id}}
+\newcommand{\Si}{\operatorname{Si}}
+\newcommand{\cA}{\mathcal{A}}
+\newcommand{\ft}[1]{\widehat{#1}}
+\newcommand{\Ap}{A_+(1)}
+\newcommand{\Csix}{C_{6.11}}
+
+\newcommand{\rdec}{0.5502}
+\newcommand{\Cdec}{0.30272004}
+\newcommand{\UBC}{0.3089}
+\newcommand{\certU}{\texttt{cert\_r05502\_K35.json}}
+\newcommand{\shaU}{\texttt{512554986a1f07fb4b0d631e6c9925229de1cbda4144df78678d5e6d199bc9c9}}
+\newcommand{\npairsU}{530}
+\newcommand{\nwideU}{524}
+\newcommand{\nnarrowU}{6}
+\newcommand{\ncosU}{5}
+\newcommand{\betasU}{r,\ 0.57,\ 0.6,\ 0.63,\ 2.49}
+\newcommand{\dmainU}{0.94597564}
+\newcommand{\dsumU}{0.94999999}
+\newcommand{\cmaxU}{1000}
+\newcommand{\psidegU}{40}
+\newcommand{\phirU}{32.65}
+\newcommand{\kappaU}{0.943802}
+\newcommand{\mPoneU}{10^{-4}}
+\newcommand{\ePoneU}{10^{-7}}
+\newcommand{\YTU}{1500}
+\newcommand{\tailPoneU}{0.0427}
+\newcommand{\rhoPoneU}{1.486\cdot10^{-10}}
+\newcommand{\rhsPoneU}{1.959\cdot10^{-6}}
+\newcommand{\mPtwoU}{6\cdot10^{-5}}
+\newcommand{\ePtwoU}{2\cdot10^{-6}}
+\newcommand{\tailPtwoU}{0.0427}
+\newcommand{\rhoPtwoU}{4.73\cdot10^{-7}}
+\newcommand{\rhsPtwoU}{3.917\cdot10^{-5}}
+\newcommand{\yminU}{2.9194477}
+\newcommand{\WminU}{0.0001633}
+\newcommand{\certX}{\texttt{cert\_r05485\_X30.json}}
+\newcommand{\rXdec}{0.5485}
+\newcommand{\npairsX}{450}
+\newcommand{\kappaX}{0.942138}
+\newcommand{\YTX}{300}
+\newcommand{\mPoneX}{2\cdot10^{-3}}
+\newcommand{\ePoneX}{10^{-7}}
+\newcommand{\tailPoneX}{0.6733}
+\newcommand{\rhoPoneX}{6.98\cdot10^{-10}}
+\newcommand{\rhsPoneX}{1.896\cdot10^{-6}}
+\newcommand{\mPtwoX}{10^{-3}}
+\newcommand{\ePtwoX}{2.5\cdot10^{-5}}
+\newcommand{\tailPtwoX}{0.6762}
+\newcommand{\rhoPtwoX}{2.28\cdot10^{-5}}
+\newcommand{\rhsPtwoX}{4.740\cdot10^{-4}}
+\newcommand{\yminX}{4.5972503}
+\newcommand{\WminX}{0.0022918}
+\newcommand{\certP}{\texttt{pcert\_r05509\_NR2.json}}
+\newcommand{\shaP}{\texttt{ccf9e2d5a709072f411c0e48f16f4fe93793dfe627260a02ce88545f2b6649c4}}
+\newcommand{\rPdec}{0.5509}
+\newcommand{\CPdec}{0.30349081}
+\newcommand{\npairsP}{1808}
+\newcommand{\widthsP}{\{1,2,4,8,16\}}
+\newcommand{\centersP}{\{0,0.25,0.5,\dots,80\}}
+\newcommand{\smaxP}{80}
+\newcommand{\aTP}{\tfrac{1}{2048}}
+\newcommand{\cTP}{1.93021\cdot10^{-5}}
+\newcommand{\gzeroP}{-1.000006\cdot10^{-8}}
+\newcommand{\YP}{92}
+\newcommand{\YPtwo}{184}
+\newcommand{\lbPthree}{9.96\cdot10^{-9}}
+\newcommand{\lbPfour}{1.20\cdot10^{-12}}
+\newcommand{\lpG}{0.5488}
+\newcommand{\lpC}{0.5502}
+\newcommand{\lpCb}{0.5503}
+\newcommand{\vzero}{0.4535}
+\newcommand{\shapeThr}{0.0015}
+\newcommand{\shapeInt}{$[1.07,2.14]$, $[3.12,3.84]$, $[5.01,5.66]$ and $[6.87,7.43]$}
+\newcommand{\shapeHigh}{2.8}
+\newcommand{\DOIsupp}{10.5281/zenodo.23716093}
+\def\RepoCommit{}
+\IfFileExists{commit.tex}{\input{commit.tex}}{}
+\newcommand{\RepoLink}{\url{https://github.com/tejasvi/sign-uncertainty-constant/tree/v6}\ifx\RepoCommit\empty\else\ (commit \texttt{\RepoCommit})\fi}
+\newcommand{\lowKappa}{0.9503}
+\newcommand{\lowM}{10^{-4}}
+\newcommand{\lowDelta}{10^{-6}}
+
+\raggedbottom
+\begin{document}
+
+\title{Bounds for the sign uncertainty constant in dimension one}
+\author{Tejasvi Singh Tomar}
+\renewcommand{\urladdrname}{{\itshape ORCID}}
+\urladdr{\href{https://orcid.org/0000-0003-4668-3639}{https://orcid.org/0000-0003-4668-3639}}
+\subjclass[2020]{42A38; 45B05, 65G20, 68V20}
+\keywords{Sign uncertainty principle, Fourier eigenfunctions, Fredholm integral equation, ball arithmetic, computer-assisted proof, Lean~4}
+
+\begin{abstract}
+Bourgain, Clozel and Kahane proved that a nonzero even real function $f$ on $\R$ with $f$ and $\ft f$ integrable, $f(0)\le0$ and $\ft f(0)\le0$ cannot have $f$ and $\ft f$ both nonnegative outside an arbitrarily small neighborhood of the origin. The sharp constant in this sign uncertainty principle is $\Ap$, the infimum of $\sqrt{A(f)A(\ft f)}$ over all such $f$, where $A(f)$ is the radius beyond which $f$ is nonnegative; its square is the constant of Problem~6.11 in the list of Georgiev, G\'omez-Serrano, Tao and Wagner. We prove $\rdec<\Ap\le\rPdec$, improving the previous bounds $0.45\le\Ap\le\sqrt{\UBC}$; in particular $\Ap<0.555$, as conjectured by Gon\c{c}alves, Oliveira e Silva and Ramos. The lower bound comes from a weight in the spirit of the summation formulas of Cohn and Gon\c{c}alves, built from Gaussians and cosines and corrected near the origin by an approximate solution of a Fredholm integral equation, and the upper bound from an explicit self-dual combination of Gaussians. The numerical inequalities in both proofs are verified in ball arithmetic, and the bounds $\rdec\le\Ap\le\rPdec$ also have formal proofs in Lean~4.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}\label{sec:intro}
+
+We normalize the Fourier transform as $\ft f(\xi)=\int_\R f(x)e^{-2\pi ix\xi}\,dx$. For a function $f$ on $\R$ let
+\[
+A(f)=\inf\{r>0:\ f(x)\ge0\text{ for all }|x|\ge r\},
+\]
+with $\inf\emptyset=\infty$, where $f(x)\ge0$ means in particular that $f(x)$ is real. Let $\cA$ be the set of nonzero even functions $f\colon\R\to\R$ such that $f$ and $\ft f$ are integrable, $f(0)\le0$ and $\ft f(0)\le0$. Such $f$ and $\ft f$ agree almost everywhere with continuous functions, and we always use the continuous versions. Bourgain, Clozel and Kahane proved that $A(f)A(\ft f)\ge0.1687$ for all $f\in\cA$ \cite[Th\'eor\`eme~1.1]{BCK10}. Following \cite{CG19} we write
+\[
+\Ap=\inf_{f\in\cA}\sqrt{A(f)A(\ft f)}.
+\]
+Georgiev, G\'omez-Serrano, Tao and Wagner \cite[Problem~6.11]{GGTW25} ask for the largest constant $\Csix$ such that $A(f)A(\ft f)\ge\Csix$ for every even $f\in L^1(\R)$ with $f(0)<0$ and $\ft f(0)<0$. Here $f$ may be complex-valued, and we take it to be continuous at $0$, so that $f(0)$ is defined. Lemma~\ref{lem:class} below, together with a result of Gon\c{c}alves, Oliveira e Silva and Ramos \cite{GOR21}, shows that $\Csix=\Ap^2$.
+
+Gon\c{c}alves, Oliveira e Silva and Steinerberger \cite[Theorem~2]{GOS17} improved the constant $0.1687$ to $0.2025$, that is, $\Ap\ge0.45$. Their proof uses rearrangement inequalities, and they remark that it can be refined to give $\Ap\ge0.453$ \cite[Section~4]{GOS17}. Explicit functions give the upper bounds $\Ap<\sqrt{0.353}\approx0.5941$ \cite[Theorem~2]{GOS17} and $\Ap\le0.572990$ \cite[Table~4.1]{CG19}. Computer searches \cite{AE25,GGTW25} lowered the latter to $\Ap\le\sqrt{0.321591}\approx0.5671$ \cite[Table~3]{GGTW25}. A further computer search, reported by Chung, Du and Wesley \cite[Section~6.5]{CDW26}, produced an even function $f=\ft f$ with $f(0)<0$ and $A(f)^2\le0.3089$, so that $\Ap\le\sqrt{0.3089}\approx0.5558$ and $\Csix\le0.3089$. Gon\c{c}alves, Oliveira e Silva and Ramos conjecture that $\Ap<0.555$ and that every minimizer vanishes identically on a sequence of nonempty intervals after its last sign change \cite[Conjecture~1.7]{GOR23}. They also report that, under their Conjecture~3.4, a least-squares fit to their numerical data suggests $\Ap\approx0.550$ \cite[Section~6.1]{GOR23}.
+
+\begin{theorem}\label{thm:main}
+We have $\rdec<\Ap\le\rPdec$.
+\end{theorem}
+
+\begin{corollary}\label{cor:six}
+The constant of \cite[Problem~6.11]{GGTW25} satisfies $\Cdec<\Csix\le\CPdec$.
+\end{corollary}
+
+In particular, the upper bound proves the first assertion of \cite[Conjecture~1.7]{GOR23}, namely $\Ap<0.555$; the second, about the zeros of minimizers, remains open.
+
+\subsection*{The method}
+The upper bound needs only an explicit function: an even self-dual (that is, $\ft g=g$) combination $g$ of Gaussians with $g(0)<0$ and $g\ge0$ for $|x|\ge r$ gives $\Ap\le r$ (Lemma~\ref{lem:upper}), and we give such a $g$ for $r=\rPdec$. For the lower bound we use a theorem of Gon\c{c}alves, Oliveira e Silva and Steinerberger \cite[Theorem~3]{GOS17}, the existence of extremizers:
+\begin{itemize}[leftmargin=3em]
+\item[(E)] some nonzero even real $g\in L^1(\R)$ with $\ft g=g$ and $g(0)=0$ satisfies $A(g)=\Ap$.
+\end{itemize}
+ By Lemma~\ref{lem:reduction} it is therefore enough to show that for $r=\rdec$ every even real self-dual $g\in L^1(\R)$ with $g(0)\le0$ that is nonnegative on $O=\{|x|>r\}$ vanishes. A self-dual $g$ is orthogonal to every integrable $u$ with $\ft u=-u$, so $g(0)=\int g=\int g(1-u)$. If $1-u$ vanished on $I=[-r,r]$ and were positive on $O$, then $g(0)\le0$ would force $g=0$ on $O$, and hence $g=0$.
+
+We build $u$ in two parts. The first part $v$ is an explicit combination of differences $b-\ft b$ of Gaussian pairs and, with nonnegative weights $d$, of cosines $\cos(2\pi\beta x)$ with $\beta\ge r$. A cosine is not integrable, but it pairs with $g$ to give $g(\beta)\ge0$, so the cosines contribute nonnegative point masses $d\,g(\beta)$ to the identity for $g(0)$. The second part is $\varphi-\ft\varphi$ for an even function $\varphi$ supported in $I$. The requirement $1-u=0$ on $I$ becomes the Fredholm equation $(\Id-K)\varphi=1-v$ on $I$, where $K$ is the integral operator on $I$ with kernel $\cos(2\pi xy)$. For $r=\rdec$ the Hilbert--Schmidt norm of $K$ is less than $1$, so this equation has a unique solution. We take $\varphi=1-v+\psi$ on $I$ with an even polynomial $\psi$. This $\varphi$ solves the equation if and only if $\psi=K\varphi$, and in general an a priori bound for $g$ on $I$ absorbs the residual $\rho=K\varphi-\psi$ (Lemma~\ref{lem:apriori}). What remains to be checked is that the function $W=1-v+\ft\varphi$ is bounded below by some $m>0$ on $O$ and that $\rho$ is small compared with $m$ (Theorem~\ref{thm:criterion}).
+
+The method is an analogue of a criterion of Cohn and Gon\c{c}alves \cite[Proposition~2.4]{CG19}. They consider constants $A_\sigma(d)$, where $\sigma=\pm1$ and $A_{+1}(1)=\Ap$, and show that if $0<t_0<t_1<\cdots$ with $t_{j+1}/t_j\to1$, $\lambda_j>0$, and the summation formula $f(0)=\sigma\sum_j\lambda_jf(t_j)$ holds for all radial Schwartz functions $f$ on $\R^d$ with $\ft f=\sigma f$, then $A_\sigma(d)\ge t_0$. In dimension $12$ a formula of this kind gives the sharp value $A_{+1}(12)=\sqrt2$ \cite{CG19}. They conjecture that for each $(\sigma,d)$ except perhaps $(\sigma,d)=(1,1)$ some formula of this kind proves a sharp lower bound \cite[Conjecture~2.5]{CG19}. In our identity \eqref{eq:identity} the measure $W(y)\,dy$ on $O$ together with finitely many point masses takes the place of the discrete measure, and the identity holds up to a residual term on $I$.
+
+\subsection*{Verification}
+Two programs, written separately, each verify the hypotheses of Theorem~\ref{thm:criterion} in ball arithmetic \cite{Joh17} for a certificate given by exact fractions (Section~\ref{sec:proof}), and two further programs verify the function $g$ of the upper bound (Section~\ref{sec:upper}). The bounds $\rdec\le\Ap\le\rPdec$ also have formal proofs in Lean~4, in which the Lean kernel checks the inequalities for the certificates; Section~\ref{sec:lean} describes them, together with a formal proof of the strict lower bound from \textup{(E)}.
+
+\section{Reduction to self-dual functions}\label{sec:reduction}
+
+We first reduce Theorem~\ref{thm:main} to a statement about self-dual functions. Throughout, $r>0$, $I=[-r,r]$ and $O=\R\setminus I$. For $g\in L^1(\R)$ with $\ft g\in L^1(\R)$ we use the continuous version of $g$, and then $g\ge0$ almost everywhere on $O$ if and only if $g\ge0$ everywhere on $O$.
+
+\begin{definition}\label{def:Sr}
+We say that $(S_r)$ holds if every even real function $g\in L^1(\R)$ with $\ft g=g$, $g(0)\le0$ and $g\ge0$ on $O$ vanishes.
+\end{definition}
+
+\begin{lemma}\label{lem:reduction}
+If $(S_r)$ holds, then $\Ap>r$.
+\end{lemma}
+
+\begin{proof}
+Let $g$ be as in \textup{(E)} (see also \cite[Theorem~1.4]{CG19}). Suppose that $\Ap\le r$. Then $g(x)\ge0$ for all $|x|>\Ap$, in particular on $O$, and $(S_r)$ implies $g=0$, a contradiction.
+\end{proof}
+
+\begin{remark}\label{rem:nonstrict}
+The dilation argument of \cite[Section~1]{BCK10} (see also \cite[Section~3.3]{GOS17}) gives $\Ap\ge r$ without the existence of extremizers. Let $f\in\cA$ with $A(f)$ and $A(\ft f)$ finite. Both numbers are positive \cite[Section~1.1]{GOS17}. After a dilation, $A(f)=A(\ft f)=\tau$ with $\tau^2=A(f)A(\ft f)$. Then $g=f+\ft f$ is even, self-dual and nonnegative for $|x|>\tau$, and $g(0)\le0$. It is also nonzero: if $\ft f=-f$, then $f$ and $\ft f$ both vanish for $|x|>\tau$, and a compactly supported integrable function with compactly supported Fourier transform is zero. If $\tau\le r$, then $(S_r)$ would force $g=0$, a contradiction. Hence $\sqrt{A(f)A(\ft f)}>r$ for every $f\in\cA$ (trivially when $A(f)$ or $A(\ft f)$ is infinite), and $\Ap\ge r$.
+\end{remark}
+
+The class of \cite[Problem~6.11]{GGTW25} does not require $\ft f\in L^1(\R)$. The next lemma shows that this makes no difference.
+
+\begin{lemma}\label{lem:class}
+Let $f\in L^1(\R)$ be continuous at $0$, and suppose that $\ft f$ is real and that $\ft f(\xi)\ge0$ for all $|\xi|\ge R$, for some $R>0$. Then $\ft f\in L^1(\R)$. Consequently $\Csix\ge\Ap^2$, and in fact $\Csix=\Ap^2$.
+\end{lemma}
+
+\begin{proof}
+For $L>0$ let $\Lambda_L(\xi)=(1-|\xi|/L)_+$ and $F_L(x)=L\bigl(\sin(\pi Lx)/(\pi Lx)\bigr)^2$, so that $F_L\ge0$, $\int F_L=1$, $F_L(x)\le1/(\pi^2Lx^2)$ and $\ft{\Lambda_L}=F_L$. By Fubini's theorem $\int\ft f\Lambda_L=\int fF_L$, and the right side tends to $f(0)$ as $L\to\infty$, because $f$ is integrable and continuous at $0$. On $|\xi|<R$ dominated convergence gives $\int_{|\xi|<R}\ft f\Lambda_L\to\int_{|\xi|<R}\ft f$. On $|\xi|\ge R$ the integrand is nonnegative and increases with $L$, so monotone convergence gives $\int_{|\xi|\ge R}\ft f=f(0)-\int_{|\xi|<R}\ft f<\infty$.
+
+Now let $f\in L^1(\R)$ be even and continuous at $0$, with $f(0)<0$ and $\ft f(0)<0$. Then $A(f)>0$, and $A(\ft f)>0$ because $\ft f$ is continuous. If $A(f)$ or $A(\ft f)$ is infinite, there is nothing to prove. Otherwise $f$ and $\ft f$ are real outside bounded sets. The imaginary part $w$ of $f$ is even and integrable, and $\ft w=\operatorname{Im}\ft f$ because $f$ is even. So $w$ and $\ft w$ vanish outside bounded sets, and $w=0$. Thus $f$ and $\ft f$ are real, and $\ft f\in L^1(\R)$ by the first part. Then $f$ agrees almost everywhere with a continuous function $\tilde f$, and $\tilde f(0)=f(0)$ because $f$ is continuous at $0$. Hence $\tilde f\in\cA$. If $f\ge0$ for $|x|\ge R'$, then $\tilde f\ge0$ almost everywhere there, and hence everywhere by continuity, so $A(\tilde f)\le A(f)$. Therefore $A(f)A(\ft f)\ge A(\tilde f)A(\ft f)\ge\Ap^2$, and $\Csix\ge\Ap^2$. Conversely, \cite[Proposition~3]{GOR21} shows that $\Ap$ is also the infimum of $\sqrt{A(f)A(\ft f)}$ over the functions $f\in\cA$ with $\ft f=f$ and $f(0)<0$. These functions satisfy the conditions of Problem~6.11, so $\Csix\le\Ap^2$.
+\end{proof}
+
+\section{A sufficient condition}\label{sec:criterion}
+
+We now state a sufficient condition for $(S_r)$ in terms of explicit data. For $u\in L^2(I)$ let $(Ku)(x)=\int_Iu(t)\cos(2\pi xt)\,dt$ for $x\in I$. Since $\cos^2(2\pi xt)=\frac12(1+\cos(4\pi xt))$ and $\int_I\cos(4\pi xt)\,dt=\sin(4\pi rx)/(2\pi x)$, the Hilbert--Schmidt norm of $K$ is
+\begin{equation}\label{eq:kappa}
+\kappa(r)=\Bigl(\int_I\int_I\cos^2(2\pi xt)\,dx\,dt\Bigr)^{1/2}=\Bigl(2r^2+\frac{\Si(4\pi r^2)}{2\pi}\Bigr)^{1/2},\qquad \Si(z)=\int_0^z\frac{\sin t}{t}\,dt.
+\end{equation}
+
+\begin{definition}\label{def:cert}
+A \emph{certificate} for $r$ consists of finitely many triples $(a_j,s_j,c_j)$ with $a_j>0$, $s_j\ge0$ and $c_j\in\R$, finitely many pairs $(\beta_k,d_k)$ with $\beta_k\ge r$ and $d_k\ge0$, and an even polynomial $\psi$. With
+\[
+b_j(x)=e^{-\pi a_j(x-s_j)^2}+e^{-\pi a_j(x+s_j)^2},\qquad \ft{b_j}(y)=\frac{2}{\sqrt{a_j}}\,e^{-\pi y^2/a_j}\cos(2\pi s_jy),
+\]
+we associate with it the functions
+\begin{align*}
+v(x)&=\sum_jc_j\bigl(b_j(x)-\ft{b_j}(x)\bigr)+\sum_kd_k\cos(2\pi\beta_kx), & \varphi&=(1-v+\psi)\one_I,\\
+W(y)&=1-v(y)+\ft\varphi(y)\quad(y\in\R), & \rho(x)&=\ft\varphi(x)-\psi(x)\quad(x\in I),
+\end{align*}
+where $\ft\varphi(y)=\int_I\varphi(t)\cos(2\pi yt)\,dt$.
+\end{definition}
+
+The functions $v$, $\ft\varphi$, $W$ and $\rho$ are even, bounded and continuous, and $\ft\varphi=K\varphi$ on $I$.
+
+\begin{lemma}\label{lem:identity}
+For every certificate and every even real $g\in L^1(\R)$ with $\ft g=g$,
+\begin{equation}\label{eq:identity}
+g(0)=\int_Og(y)W(y)\,dy+\sum_kd_kg(\beta_k)+\int_Ig(x)\rho(x)\,dx.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Since $g$ and $\ft g=g$ are integrable, $g$ is continuous and bounded, and since $g$ is even, $g(x)=\int g(t)\cos(2\pi xt)\,dt$ for all $x$. In particular $g(0)=\int g$. The products of $g$ with the bounded functions $v$, $\varphi$ and $\ft\varphi$ are integrable. As $b_j$ and $\varphi$ are integrable, Fubini's theorem gives $\int g\ft{b_j}=\int\ft gb_j=\int gb_j$ and $\int g\ft\varphi=\int\ft g\varphi=\int g\varphi$. The inversion formula gives $\int g(x)\cos(2\pi\beta_kx)\,dx=g(\beta_k)$. Hence $\int gv=\sum_kd_kg(\beta_k)$ and $\int g(\varphi-\ft\varphi)=0$, and therefore
+\[
+g(0)=\int g\,(1-v-\varphi+\ft\varphi)+\sum_kd_kg(\beta_k).
+\]
+On $O$ we have $\varphi=0$, so $1-v-\varphi+\ft\varphi=W$. On $I$ we have $1-v-\varphi=-\psi$, so $1-v-\varphi+\ft\varphi=\rho$.
+\end{proof}
+
+\begin{lemma}\label{lem:apriori}
+Suppose that $\kappa(r)<1$. Let $g\in L^1(\R)$ be even and real with $\ft g=g$ and $g\ge0$ on $O$, and put $P=\int_Og$. Then
+\[
+\|g\|_{L^2(I)}\le\frac{\sqrt{2r}\,P}{1-\kappa(r)}.
+\]
+\end{lemma}
+
+\begin{proof}
+For $x\in I$ the inversion formula gives $g(x)=(Kg_I)(x)+h(x)$, where $g_I$ is the restriction of $g$ to $I$ and $h(x)=\int_Og(t)\cos(2\pi xt)\,dt$. Since $g\ge0$ on $O$, we have $|h|\le P$ on $I$, so $\|h\|_{L^2(I)}\le\sqrt{2r}\,P$. The operator norm of $K$ is at most $\kappa(r)<1$, so $\Id-K$ is invertible with $\|(\Id-K)^{-1}\|\le1/(1-\kappa(r))$ by the Neumann series, and $g_I=(\Id-K)^{-1}h$.
+\end{proof}
+
+\begin{theorem}\label{thm:criterion}
+Let a certificate for $r$ be given, and let $m>0$ and $\delta\ge0$ satisfy
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item\label{c:kappa} $\kappa(r)<1$,
+\item\label{c:W} $W(y)\ge m$ for all $y>r$,
+\item\label{c:rho} $|\rho(x)|\le\delta$ for all $x\in[0,r]$,
+\item\label{c:final} $m>2r\delta/(1-\kappa(r))$.
+\end{enumerate}
+Then $(S_r)$ holds, and therefore $\Ap>r$.
+\end{theorem}
+
+\begin{proof}
+Let $g$ be as in Definition~\ref{def:Sr}, and put $P=\int_Og$. The function $g$ is continuous and nonnegative on $O$. In particular $g(\beta_k)\ge0$ for every $k$, as a limit from the right when $\beta_k=r$. Since $W$ and $\rho$ are even, \ref{c:W} holds on $O$ and \ref{c:rho} holds on $I$. We apply Lemma~\ref{lem:identity}, the Cauchy--Schwarz inequality and Lemma~\ref{lem:apriori}:
+\[
+0\ge g(0)\ge mP-\|g\|_{L^2(I)}\|\rho\|_{L^2(I)}\ge mP-\frac{\sqrt{2r}\,P}{1-\kappa(r)}\,\sqrt{2r}\,\delta=P\Bigl(m-\frac{2r\delta}{1-\kappa(r)}\Bigr).
+\]
+By \ref{c:final}, $P=0$. Hence $g=0$ on $O$. Then $g$ has compact support, so $\ft g$ extends to an entire function. Since $\ft g=g$ vanishes on $O$, we get $\ft g=0$ and $g=0$. By Lemma~\ref{lem:reduction}, $\Ap>r$.
+\end{proof}
+
+\begin{remark}\label{rem:exact}
+The proofs above use only that $\psi$ is even, bounded and continuous. If $\varphi$ solves $(\Id-K)\varphi=1-v$ on $I$ and $\psi=K\varphi$, then $\rho=0$, and \ref{c:final} reduces to $m>0$. In a certificate, $\psi$ is a polynomial close to $K\varphi$ and $\rho$ is the error of this approximation. Since $W$ and $\rho$ depend affinely and continuously on the coefficients, a small change of the coefficients changes them only slightly, and the data can be rounded to rationals.
+\end{remark}
+
+\section{Proof of the lower bound}\label{sec:proof}
+
+\subsection{The certificate} All numbers in our main certificate, for $r=\rdec$, are exact fractions. It has $\npairsU$ Gaussian pairs. Of these, $\nwideU$ have widths $a_j\in\{2,8,32\}$ and centers $s_j\in\{0.2,0.4,\dots,35\}$ (all combinations except $a_j=32$, $s_j=0.2$), and $\nnarrowU$ are narrow pairs with $a_j\in\{128,512,2048\}$ and $s_j\in[0.5,r]$. The coefficients $c_j$ are multiples of $10^{-8}$ with $|c_j|<\cmaxU$. The $\ncosU$ cosines have frequencies $\beta_k\in\{\betasU\}$ and weights $d_k$ that are multiples of $10^{-8}$. The weight at $\beta_k=r$ is $\dmainU$, and $\sum_kd_k=\dsumU$. The polynomial $\psi$ has degree $\psidegU$ and terminating decimal coefficients.
+
+The function $\varphi$ jumps at $\pm r$, with $\varphi(r)>\phirU$. Hence $W(r)=\varphi(r)+\rho(r)$ is large, and $\ft\varphi(y)$ behaves like $\varphi(r)\sin(2\pi ry)/(\pi y)$ for large $y$. Condition~\ref{c:W} must therefore be checked far out: both programs subdivide $[r,\YTU]$ and treat $[\YTU,\infty)$ by integration by parts.
+
+\subsection{The programs} Both programs read the data as exact fractions and accept an inequality only when ball arithmetic or exact rational arithmetic proves it. They also check that $\beta_k\ge r$ and $d_k\ge0$ for every $k$.
+
+\emph{Program~1} evaluates $\ft\varphi$ and its first two derivatives by $N$-point Gauss--Legendre quadrature on $[0,r]$, with nodes and weights enclosed in ball arithmetic. Its error bound rests on \cite[Theorem~8.1]{Tre13}, applied after the change of variables $t\mapsto r(1+t)/2$ from $[-1,1]$ to $[0,r]$: if $F$ is analytic in the open Bernstein ellipse $E_{\theta}$ and $|F|\le M$ there, then the Chebyshev coefficients of $F$ satisfy $|a_k|\le2M\theta^{-k}$. The rule integrates polynomials of degree less than $2N$ exactly and has positive weights with sum $2$, so its error on $[-1,1]$ is at most $4\sum_{k\ge2N}2M\theta^{-k}=8M\theta^{-2N}/(1-\theta^{-1})$. The program bounds $M$ term by term on the ellipse. For $0\le y\le Y_T$ the factor $|\cos(2\pi yt)|\le\cosh(2\pi Y_T\,|\operatorname{Im}t|)$ dominates $M$, and this is why $N$ must be large. It covers $[r,Y_T]$ by intervals $[y_0-\eta,y_0+\eta]$ and checks $W(y_0)-|W'(y_0)|\eta-\eta^2\sup|W''|/2\ge m$, where the supremum is enclosed by evaluating the Taylor coefficients of $W$ on the whole interval. For $y\ge Y_T$ it uses $W\ge1-\sum_kd_k-V_T-2B$, where $V_T$ bounds the Gaussian part of $|v|$ on $[Y_T,\infty)$ (each Gaussian term decreases there, because all $s_j\le Y_T$, which the program checks) and
+\[
+B=\sum_{k<6}\frac{|\varphi^{(k)}(r)|}{\omega^{k+1}}+\frac{1}{\omega^{6}}\int_0^r|\varphi^{(6)}|,\qquad\omega=2\pi Y_T,
+\]
+bounds $|\int_0^r\varphi(t)\cos(2\pi yt)\,dt|$ for all $y\ge Y_T$ by six integrations by parts. The boundary terms at $0$ vanish, because $\sin0=0$ and the odd derivatives of $\varphi$ vanish at $0$. The integral of $|\varphi^{(6)}|$ is bounded by a sum, over subintervals, of the length times an enclosure of $\sup|\varphi^{(6)}|$, with each term rounded up to a rational number. For~\ref{c:rho} the program writes $\rho(x)=\sum_k\rho_kx^{2k}$ with $\rho_k=(-1)^k(2\pi)^{2k}\mu_{2k}/(2k)!-q_k$, where $q_k$ is the coefficient of $x^{2k}$ in $\psi$ and $\mu_{2k}=\int_I\varphi(t)t^{2k}\,dt$, and bounds $\sup_{[0,r]}|\rho|$ by $\sum_k|\rho_k|r^{2k}$. It computes the moments $\mu_{2k}$ for $k\le60$ by the same quadrature and bounds the terms with $k>60$ by a geometric series.
+
+\emph{Program~2} evaluates $\ft\varphi$ in closed form: the Gaussian terms through the complex error function, the polynomial term through \[\int_I\psi(t)e^{2\pi iyt}\,dt=2\operatorname{Re}\bigl[e^{2\pi iry}\sum_j(-1)^j\psi^{(j)}(r)/(2\pi iy)^{j+1}\bigr]\] (by its power series for small $y$), and the cosines through \[\int_I\cos(2\pi\beta t)\cos(2\pi yt)\,dt=r\bigl[\operatorname{sinc}(2\pi r(\beta-y))+\operatorname{sinc}(2\pi r(\beta+y))\bigr]\] with $\operatorname{sinc}z=(\sin z)/z$. On an interval $[y_0,y_1]$ it uses $W\ge\min(W(y_0),W(y_1))-(y_1-y_0)^2\sup|W''|/8$, with $\sup|W''|\le\sup|v''|+4\pi^2\int_I|\varphi(t)|t^2\,dt$ (and an integration-by-parts bound for $y\ge20$). It bounds $|\rho|$ on a grid of $[0,r]$ by the same interpolation bound, with $\sup|\rho''|\le4\pi^2\int_I|\varphi(t)|t^2\,dt+\sup|\psi''|$, treats $[Y_T,\infty)$ by eight integrations by parts, and bounds $\kappa(r)$ in exact rational arithmetic. For certificates without cosines we use Program~1 without the cosine terms and a version of Program~2 that has neither the cosine terms nor the separate bound for $y\ge20$.
+
+\begin{table}[ht]
+\centering
+\caption{Verification of the certificates for the lower bound. Here $W(y^*)$ is the value, computed in ball arithmetic, at a numerically located minimizer $y^*$. Upper bounds are rounded up and lower bounds down.}\label{tab:verify}
+\small
+\setlength{\tabcolsep}{3.5pt}
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+Certificate & \multicolumn{2}{c}{main} & \multicolumn{2}{c}{without cosines}\\
+$r$; Gaussian pairs; cosines & \multicolumn{2}{c}{$\rdec$;\ $\npairsU$;\ $\ncosU$} & \multicolumn{2}{c}{$\rXdec$;\ $\npairsX$;\ $0$}\\
+$\kappa(r)<$ & \multicolumn{2}{c}{$\kappaU$} & \multicolumn{2}{c}{$\kappaX$}\\
+$W(y^*)<$ & \multicolumn{2}{c}{$\WminU$ at $y^*=\yminU$} & \multicolumn{2}{c}{$\WminX$ at $y^*\approx\yminX$}\\
+\midrule
+Program & 1 & 2 & 1 & 2\\
+$m$;\ $\delta$ & $\mPoneU$;\ $\ePoneU$ & $\mPtwoU$;\ $\ePtwoU$ & $\mPoneX$;\ $\ePoneX$ & $\mPtwoX$;\ $\ePtwoX$\\
+$Y_T$ & $\YTU$ & $\YTU$ & $\YTX$ & $\YTX$\\
+$W\ge$ on $[Y_T,\infty)$ & $\tailPoneU$ & $\tailPtwoU$ & $\tailPoneX$ & $\tailPtwoX$\\
+$\sup_{[0,r]}|\rho|\le$ & $\rhoPoneU$ & $\rhoPtwoU$ & $\rhoPoneX$ & $\rhoPtwoX$\\
+$2r\delta/(1-\kappa(r))<$ & $\rhsPoneU$ & $\rhsPtwoU$ & $\rhsPoneX$ & $\rhsPtwoX$\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{proposition}\label{prop:cert}
+Our main certificate satisfies \ref{c:kappa}--\ref{c:final} of Theorem~\ref{thm:criterion} for $r=\rdec$ with $(m,\delta)=(\mPoneU,\ePoneU)$, and also with $(m,\delta)=(\mPtwoU,\ePtwoU)$.
+\end{proposition}
+
+\begin{proof}
+Program~1 verifies \ref{c:kappa}--\ref{c:final} for the first pair, and Program~2 for the second (Table~\ref{tab:verify}).
+\end{proof}
+
+\begin{proof}[Proof of the lower bound in Theorem~\ref{thm:main}]
+By Proposition~\ref{prop:cert} and Theorem~\ref{thm:criterion}, $\Ap>\rdec$.
+\end{proof}
+
+The cosines are not essential: a second certificate has $\npairsX$ Gaussian pairs with $a_j\in\{2,8,32\}$ and $s_j\in\{0.2,0.4,\dots,30\}$ and no cosines, and both programs verify it for $r=\rXdec$ (Table~\ref{tab:verify}), so that $\Ap>\rXdec$.
+
+\section{The upper bound}\label{sec:upper}
+
+We now prove the upper bound in Theorem~\ref{thm:main} with an explicit function.
+
+\begin{lemma}\label{lem:upper}
+Let $r>0$, let $(a_j,s_j,c_j)$ be finitely many triples with $a_j>0$, $s_j\ge0$ and $c_j\in\R$, and put $g=\sum_jc_j(b_j+\ft{b_j})$ with $b_j$ and $\ft{b_j}$ as in Definition~\ref{def:cert}. If $g(0)<0$ and $g(y)\ge0$ for all $y\ge r$, then $\Ap\le r$ and $\Csix\le r^2$.
+\end{lemma}
+
+\begin{proof}
+The function $g$ is even, real and integrable. The Fourier transform of $b_j$ is $\ft{b_j}$, and the Fourier transform of $\ft{b_j}$ is $b_j$ by Fourier inversion, because $b_j$ is even. Hence $\ft g=g$. Since $g(0)=\ft g(0)<0$, the function $g$ belongs to $\cA$ and to the class of \cite[Problem~6.11]{GGTW25}. As $g$ is even and nonnegative for $|x|\ge r$, we have $A(\ft g)=A(g)\le r$, and therefore $A(g)A(\ft g)\le r^2$.
+\end{proof}
+
+For $r=\rPdec$ we use such data, again with exact rational entries. It has $\npairsP$ Gaussian pairs: all combinations of widths $a_j\in\widthsP$ and centers $s_j\in\centersP$, narrow pairs with $a_j=64$, $s_j\in\{0.40,0.42,\dots,3\}$ and with $a_j=256$, $s_j\in\{0.50,0.51,\dots,1.20\}$, and one wide pair $T$ with $a_T=\aTP$ and $s_T=\smaxP$, whose coefficient is $c_T>\cTP$. All coefficients satisfy $|c_j|<1$. Numerically, the largest zero of $g$ is near $0.5508999$, just below $r$ (Figure~\ref{fig:gW}).
+
+Two further programs, written independently of each other, check $g(0)<0$ and $g>0$ on $[r,\infty)$, again in ball arithmetic. \emph{Program~3} proves $g>0$ on $[r,Y]$ with $Y=\max_js_j+12=\YP$ by the Taylor bound of Program~1. For $y\ge Y$ it compares $g$ with $G(y)=e^{-\pi a_T(y-s_T)^2}$. It bounds each cosine factor by $1$ in absolute value and drops the term $c_Te^{-\pi a_T(y+s_T)^2}$, which is positive. Let $E_j(y)=e^{-\pi a_j(y-s_j)^2}+e^{-\pi a_j(y+s_j)^2}+2a_j^{-1/2}e^{-\pi y^2/a_j}$ for $j\ne T$, and $E_T(y)=2a_T^{-1/2}e^{-\pi y^2/a_T}$. Each $E_j/G$ is nonincreasing on $[Y,\infty)$ if $a_T<a_j<1/a_T$ and $Y\ge(a_js_j-a_Ts_T)/(a_j-a_T)$ for $j\ne T$, and if $a_T<1/a_T$; the program checks these conditions. Hence $g/G\ge c_T-\sum_j|c_j|E_j(Y)/G(Y)$ on $[Y,\infty)$. \emph{Program~4} evaluates $g(0)$ with two different arbitrary-precision libraries, proves $g>0$ on $[r,2Y]$ by the interpolation bound of Program~2 with an explicit second derivative, and bounds $g/G$ on $[Y,\infty)$ through the vertices of the quadratic exponents. The smallest local lower bound for $g$ that Program~4 obtains (Table~\ref{tab:upper}) occurs at the right end of $[r,2Y]$, where $g$ decays like $G$.
+
+\begin{table}[ht]
+\centering
+\caption{Verification of the function $g$ of Section~\ref{sec:upper} for $r=\rPdec$. Here $G$ is the Gaussian of the wide pair. Upper bounds are rounded up and lower bounds down.}\label{tab:upper}
+\small
+\begin{tabular}{@{}lcc@{}}
+\toprule
+Program & 3 & 4\\
+\midrule
+$g(0)<$ & $\gzeroP$ & $\gzeroP$\\
+$g>0$ proved on & $[r,\YP]$ & $[r,\YPtwo]$\\
+smallest local lower bound for $g$ & $\lbPthree$ & $\lbPfour$\\
+$g/G\ge$ on $[\YP,\infty)$ & $\cTP$ & $\cTP$\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{proposition}\label{prop:upper}
+For the data described above, $g(0)<0$ and $g(y)>0$ for all $y\ge\rPdec$.
+\end{proposition}
+
+\begin{proof}
+Programs~3 and~4 verify both inequalities (Table~\ref{tab:upper}).
+\end{proof}
+
+\begin{proof}[Proof of the upper bound in Theorem~\ref{thm:main}]
+By Proposition~\ref{prop:upper} and Lemma~\ref{lem:upper}, $\Ap\le\rPdec$.
+\end{proof}
+
+\begin{proof}[Proof of Corollary~\ref{cor:six}]
+The inequality $\Csix\ge\Ap^2$ of Lemma~\ref{lem:class}, which does not use \cite{GOR21}, and Theorem~\ref{thm:main} give $\Csix>\Cdec$. Proposition~\ref{prop:upper} and Lemma~\ref{lem:upper} give $\Csix\le\rPdec^2=\CPdec$.
+\end{proof}
+
+\section{Formal verification}\label{sec:lean}
+
+The bounds of Theorem~\ref{thm:main} and Corollary~\ref{cor:six} also have proofs in the Lean~4 proof assistant \cite{Lean4} with the Mathlib library \cite{Mathlib}, with two restrictions explained below. The formal statements use Mathlib's Fourier transform, whose normalization is ours, and $A(f)$ as in Section~\ref{sec:intro}, with values in $[0,\infty]$. They define $\Ap^2$ as the infimum of $A(f)A(\ft f)$ over $\cA$, with the continuity of $f$ made explicit, and $\Csix$ as the infimum over the class of \cite[Problem~6.11]{GGTW25} for real-valued $f$ continuous at~$0$.
+
+The formal theorems state, without hypotheses, that both infima are at most $(\rPdec)^2$ and at least $(\rdec)^2$; for the lower bound they use Remark~\ref{rem:nonstrict} in place of the existence of extremizers. That both infima are greater than $(\rdec)^2$ is proved under the hypothesis \textup{(E)}, stated with the continuity of $g$ made explicit. The function $g$ of Section~\ref{sec:upper} is real, and an upper bound for the infimum over real functions also bounds the infimum over all functions of the class, so the formal upper bounds are those of Theorem~\ref{thm:main} and Corollary~\ref{cor:six}. The lower bounds for $\Csix$, on the other hand, are proved only for real-valued $f$, because the step of Lemma~\ref{lem:class} that shows that the imaginary part of $f$ vanishes is not formalized. Further lemmas show that $A(f)>0$ and $A(\ft f)>0$ on both classes, so that no product $A(f)A(\ft f)$ in the infima is of the form $0\cdot\infty$.
+
+Apart from routine variations, such as a Gaussian kernel in place of the Fej\'er kernel in Lemma~\ref{lem:class}, the formal proofs follow Sections~\ref{sec:reduction}, \ref{sec:criterion} and~\ref{sec:upper}, with two differences. They avoid analytic continuation: in the last step of the proof of Theorem~\ref{thm:criterion}, once $P=\int_Og$ vanishes, Lemma~\ref{lem:apriori} gives $g=0$ on $I$ directly, and in Remark~\ref{rem:nonstrict}, when $\tau\le r$ and $\ft f=-f$, the function $f$ vanishes outside $I$ and $f=-Kf$ on $I$, so $f=0$ because $\kappa(r)<1$. And instead of \eqref{eq:kappa} they use the bound $\kappa(\rdec)\le\lowKappa$, which follows from $\cos^2\theta\le1-(\theta-\theta^3/6)^2$ for $\theta^2\le6$.
+
+In place of Propositions~\ref{prop:cert} and~\ref{prop:upper}, two checking programs written in Lean, each with a proof of its soundness, verify the inequalities of Proposition~\ref{prop:upper} and conditions \ref{c:W} and \ref{c:rho} of Theorem~\ref{thm:criterion} with $m=\lowM$ and $\delta=\lowDelta$, both rounded up to multiples of $2^{-128}$; conditions \ref{c:kappa} and \ref{c:final} then follow from $\kappa(\rdec)\le\lowKappa$ and $2r\delta<m(1-\lowKappa)$. Both programs work in ball arithmetic, and the one for the lower bound replaces $\varphi$ by a piecewise polynomial, so that it needs no quadrature. Their runs on the two certificates are evaluated by the Lean kernel itself, so the Lean compiler is not part of the trusted base, and the theorems depend only on Lean's three standard axioms. The exported proofs were also accepted by \texttt{leanchecker} and by two further implementations of the Lean kernel, nanoda \cite{nanoda} and lean4lean \cite{Car24}. The README of the archive describes the checking programs, the trusted base and the build.
+
+\section{Remarks}\label{sec:remarks}
+
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}
+\begin{axis}[name=ga, width=0.5\textwidth, height=0.33\textwidth, xmin=0, xmax=1.5, ymin=-26, ymax=10,
+  xlabel={$y$}, ylabel={$g(y)$}, title={(a)}, tick label style={font=\footnotesize}, label style={font=\footnotesize},
+  title style={font=\footnotesize}]
+\addplot[thick, mark=none] table[x=y, y=g] {fig_g.dat};
+\draw[dashed] (axis cs:0.5509,-26) -- (axis cs:0.5509,10);
+\end{axis}
+\begin{axis}[at={(ga.east)}, anchor=west, xshift=1.1cm, width=0.5\textwidth, height=0.33\textwidth, ymode=log,
+  xmin=0, xmax=12, ymin=1e-4, ymax=100, xlabel={$y$}, ylabel={$W(y)$}, title={(b)}, tick label style={font=\footnotesize},
+  label style={font=\footnotesize}, title style={font=\footnotesize}]
+\addplot[mark=none] table[x=y, y=W] {fig_W.dat};
+\end{axis}
+\end{tikzpicture}
+\caption{Floating-point evaluations from the certificates; they are not part of the proof. (a) The function $g$ of Section~\ref{sec:upper}; the dashed line marks $r=\rPdec$. (b) The function $W$ of the main certificate of Section~\ref{sec:proof} for $r<y\le12$, on a logarithmic scale.}\label{fig:gW}
+\end{figure}
+
+\subsection*{Finding the certificates} None of the following enters the proof. For fixed $r$, fixed Gaussian pairs and fixed frequencies $\beta_k$, we replace $\varphi$ by the Nystr\"om solution of $(\Id-K)\varphi=1-v$. Then $W$ depends affinely on the coefficients $(c_j,d_k)$, and we maximize $t$ subject to $W(y)\ge t$ on a grid in $[r,1500]$, $|c_j|\le1000$, $d_k\ge0$ and $\sum_kd_k\le0.95$. The last constraint keeps the bound for $[Y_T,\infty)$ positive. We add the local minima of $W$ on a finer grid as new constraints and solve again. The Gaussian terms of $\ft\varphi$ are evaluated in closed form through the Faddeeva function, and the linear programs are solved with the interior point method \cite{SG20} of the HiGHS solver \cite{HH18}. Finally we round $c_j$ and $d_k$ to multiples of $10^{-8}$, solve for $\varphi$ again and take for $\psi$ the degree-$40$ Taylor polynomial of $K\varphi$, computed from the moments of $\varphi$. Because of the jump of $\varphi$ at $r$, the grid must contain $y=r$, be dense near $r$ and extend far beyond the centers $s_j$. For the upper bound the unknowns are the coefficients of $g$ in Lemma~\ref{lem:upper}. We maximize $\varepsilon$ subject to $g\ge\varepsilon w$ on a grid, $g(0)\le0$, $c_T\ge0$ and a bound on the size of the coefficients, where $w=1$ up to the centers and $w$ decays like the wide pair beyond them. We then round the coefficients to multiples of $10^{-12}$ and lower the coefficient of the pair with $a_j=1$ and $s_j=0$ so that $g(0)$ is about $-10^{-8}$.
+
+\subsection*{Limits of the families} With $v=0$, that is without Gaussian pairs and cosines, $\varphi$ solves $(\Id-K)\varphi=1$, and $W=1+\ft\varphi$ is positive on $O$ for $r<\vzero$ in a floating-point computation. This is close to the bound $0.453$ mentioned in \cite[Section~4]{GOS17}. The Gaussian pairs and the cosines raise this threshold, but in our floating-point runs the families above do not raise it much further. The cutting-plane linear programs returned negative values of $t$ for $r=\lpG$ without cosines ($450$ pairs, centers up to $30$), and for $r=\lpC$ and $r=\lpCb$ with cosines in families other than that of our certificate ($460$ and $680$ pairs with centers up to $30$ and $45$, against $\npairsU$ pairs with centers up to $35$ in Section~\ref{sec:proof}). Since the interior point solutions are not certified, these runs only indicate that the families leave little room beyond $r=\rdec$.
+
+\subsection*{The shape of \texorpdfstring{$W$}{W}} If a certificate with $\rho=0$ and $W\ge0$ on $O$ existed for $r=\Ap$, then \eqref{eq:identity} applied to an extremizer $g$ would give $gW=0$ on $O$, so that $g$ would vanish wherever $W>0$. In the certificate of Section~\ref{sec:proof}, a floating-point scan shows $W<\shapeThr$ at most points of the intervals \shapeInt, and of eleven shorter intervals in $[10.7,34.6]$ (Figure~\ref{fig:gW}). Between any two of the first four intervals $W$ exceeds $\shapeHigh$ somewhere, and it also has narrow dips; the smallest value $W(y^*)$ of Table~\ref{tab:verify} lies in one of them. This is consistent with the prediction of \cite[Conjecture~1.7]{GOR23} that extremizers vanish identically on a sequence of intervals beyond the last sign change.
+
+\section*{Data availability}
+The certificates, the checking programs, the linear programming scripts, the logs of the runs in Tables~\ref{tab:verify} and~\ref{tab:upper} and a script that prints the properties of the certificates stated in Sections~\ref{sec:proof} and~\ref{sec:upper} are archived at \href{https://doi.org/\DOIsupp}{doi:\DOIsupp} and available at \RepoLink. The certificates are the files \certU{} and \certX{} (Section~\ref{sec:proof}) and \certP{} (Section~\ref{sec:upper}). Programs~1 and~2 are \texttt{check\_cert\_pm.py} and \texttt{indep\_check\_pm.py}, Programs~3 and~4 are \texttt{check\_primal.py} and \texttt{indep\_primal.py}, and \texttt{check\_cert.py} and \texttt{indep\_check.py} are the versions of Programs~1 and~2 for certificates without cosines. The SHA-256 checksums of \certU{} and \certP{} are
+\begin{center}\footnotesize\shaU\quad and\quad\shaP.\end{center}
+The programs are written in Python and use python-flint, the Python interface to FLINT \cite{FLINT}, which contains Arb; we ran them with Python~3.12.13 and python-flint~0.9.0; the README of the archive gives the commands and the expected output. The data of Figure~\ref{fig:gW} and the script that computes them from the certificates are in the directory \texttt{paper} of the archive, with the source of this paper. The Lean proofs of Section~\ref{sec:lean} are in the directory \texttt{lean} of the archive; they build with Lean~4 version~4.35.0-rc3 and Mathlib at the tag \texttt{v4.35.0-rc3} (commit \texttt{c55e6e786f49}). The archive also contains perturbed copies of the certificates, which the programs reject, and a floating-point test of the identity \eqref{eq:identity}.
+
+\section*{Use of AI tools}
+Generative AI tools were used to find and prove the results, to write the programs and the Lean formalization, and to draft the text. The author reviewed the arguments, the programs and the formal proofs, and takes responsibility for the content.
+
+\begin{thebibliography}{99}
+\bibitem{AE25} A.~Novikov et al., \emph{AlphaEvolve: A coding agent for scientific and algorithmic discovery}, arXiv:2506.13131v1, 2025.
+\bibitem{BCK10} J.~Bourgain, L.~Clozel and J.-P.~Kahane, \emph{Principe d'Heisenberg et fonctions positives}, Ann. Inst. Fourier (Grenoble) \textbf{60} (2010), 1215--1232.
+\bibitem{Car24} M.~Carneiro, \emph{Lean4Lean: Verifying a typechecker for Lean, in Lean}, arXiv:2403.14064v3, 2025.
+\bibitem{CDW26} S.~Chung, W.~Du and W.~J.~Wesley, \emph{Autonomous mathematical discovery in an open-world multi-agent environment}, arXiv:2608.23691v2, 2026.
+\bibitem{CG19} H.~Cohn and F.~Gon\c{c}alves, \emph{An optimal uncertainty principle in twelve dimensions via modular forms}, Invent. Math. \textbf{217} (2019), 799--831; we cite the numbering of arXiv:1712.04438v3.
+\bibitem{FLINT} The FLINT team, \emph{FLINT: Fast Library for Number Theory}, version~3.6.0, \url{https://flintlib.org}.
+\bibitem{GGTW25} B.~Georgiev, J.~G\'omez-Serrano, T.~Tao and A.~Z.~Wagner, \emph{Mathematical exploration and discovery at scale}, arXiv:2511.02864v3, 2025; published as \emph{Mathematical discovery and exploration can be done at scale}, Proc. Natl. Acad. Sci. USA \textbf{123} (2026), no.~40, e2536158123. Problem and table numbers refer to the arXiv version.
+\bibitem{GOR23} F.~Gon\c{c}alves, D.~Oliveira e Silva and J.~P.~G.~Ramos, \emph{New sign uncertainty principles}, Discrete Anal. (2023), Paper No.~9, 46~pp.
+\bibitem{GOR21} F.~Gon\c{c}alves, D.~Oliveira e Silva and J.~P.~G.~Ramos, \emph{On regularity and mass concentration phenomena for the sign uncertainty principle}, J. Geom. Anal. \textbf{31} (2021), 6080--6101; we cite the numbering of arXiv:2003.10765v2.
+\bibitem{GOS17} F.~Gon\c{c}alves, D.~Oliveira e Silva and S.~Steinerberger, \emph{Hermite polynomials, linear flows on the torus, and an uncertainty principle for roots}, J. Math. Anal. Appl. \textbf{451} (2017), 678--711.
+\bibitem{HH18} Q.~Huangfu and J.~A.~J.~Hall, \emph{Parallelizing the dual revised simplex method}, Math. Program. Comput. \textbf{10} (2018), 119--142.
+\bibitem{Joh17} F.~Johansson, \emph{Arb: efficient arbitrary-precision midpoint-radius interval arithmetic}, IEEE Trans. Comput. \textbf{66} (2017), 1281--1292.
+\bibitem{Lean4} L.~de~Moura and S.~Ullrich, \emph{The Lean 4 theorem prover and programming language}, in: Automated Deduction -- CADE 28, Lecture Notes in Comput. Sci. \textbf{12699}, Springer, 2021, 625--635.
+\bibitem{Mathlib} The mathlib Community, \emph{The Lean mathematical library}, in: Proc. 9th ACM SIGPLAN Int. Conf. Certified Programs and Proofs (CPP 2020), 2020, 367--381.
+\bibitem{nanoda} C.~Bailey, \emph{nanoda\_lib}, a type checker for Lean~4, \url{https://github.com/ammkrn/nanoda_lib}.
+\bibitem{SG20} L.~Schork and J.~Gondzio, \emph{Implementation of an interior point method with basis preconditioning}, Math. Program. Comput. \textbf{12} (2020), 603--635.
+\bibitem{Tre13} L.~N.~Trefethen, \emph{Approximation Theory and Approximation Practice}, SIAM, Philadelphia, 2013.
+\end{thebibliography}
+
+\end{document}
